@@ -12,6 +12,9 @@ namespace PrsLibrary.Models {
         
         public virtual DbSet<User> Users { get; set; } // Adding Class so will show up in the migration
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
+        public virtual DbSet<RequestLine> RequestLines { get; set; }
 
         // Constructors
         public PrsDbContext() { } // Default Constructor with no parameters
