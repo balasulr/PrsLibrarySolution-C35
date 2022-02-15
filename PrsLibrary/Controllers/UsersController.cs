@@ -10,25 +10,27 @@ namespace PrsLibrary.Controllers {
 
     public class UsersController {
         // Private Property for Context
-        private readonly PrsDbContext _context; // readonly is a safetynet. Only way that can set is in the contructor
+        private readonly PrsDbContext _context; // readonly is a safety net. Only way that can be set is in the contructor
 
-        public UsersController(PrsDbContext context) { // Constructor
+        // Constructor
+        public UsersController(PrsDbContext context) {
             this._context = context;
         }
 
-        // 2 Read fuctions
-        // Method to return all of the users in the User Table
+        //// 2 Read fuctions then have Insert, Update & Delete
+
+        // 1. Method to return all of the users in the User Table
         public IEnumerable<User> GetAll() {
             return _context.Users.ToList(); // Returns all users in a List
         }
 
-        // Allow user to read by primary key (Most that can read is 1)
+        // 2. Allow user to read by primary key (Most that can read is 1)
         // Returns the user instance or null
         public User GetByPk(int id) {
             return _context.Users.Find(id);
         }
 
-        // Insert Statement
+        // 3. Insert Statement
         public User Create(User user) {
             if(user is null) {
                 throw new ArgumentNullException("user");
@@ -41,12 +43,13 @@ namespace PrsLibrary.Controllers {
             return user;
         }
 
-        // Update - Change some of the data for a user
+        // 4. Update - Change some of the data for a user
         public void Change(User user) {
             _context.SaveChanges();
         }
 
-        // Delete where the user passes in the primary key
+        // 5. Delete
+        // User passes in a primary key that wants to delete
         public void Remove(int id) {
             var user = _context.Users.Find(id);
             if(user is null) {

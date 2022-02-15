@@ -42,7 +42,7 @@ namespace TestPrsLibrary {
             }
             ///////////////////////////////////////////////////////////////////////////////
 
-            //userCtrl.Remove(6);
+            //userCtrl.Remove(6); // This line deleted the sixth instance oof the users
 
             // Methods to get all users
             var users = userCtrl.GetAll();
