@@ -16,20 +16,59 @@ namespace TestPrsLibrary {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
         static void Main(string[] args) {
-            ////////////////////////////////////////////////////////////////////////////////////////////////
-            //// Login Method
             var context = new PrsDbContext();
 
-            var userCtrl = new UsersController(context);
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            var reqlCtrl = new RequestLinesController(context);
 
-            var user = userCtrl.Login("sa", "sa");
-            //var user = userCtrl.Login("sa", "sax"); // Will not work & say User not found
+            var reql = reqlCtrl.GetByPk(12);
+            reql.Quantity = 2;
+            reqlCtrl.Change(reql);
 
-            if(user is null) {
-                Console.WriteLine("User not found");
-            } else {
-                Console.WriteLine(user.Username);
-            }
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            //var reqCtrl = new RequestsController(context);
+            //var reqs = reqCtrl.GetRequestsInReview(5); // Where put in what user we are
+
+            //foreach(var req in reqs) {
+            //    Console.WriteLine($"{req.Description} {req.Status} {req.Total} {req.UserId}");
+            //}
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            //var context = new PrsDbContext();
+
+            //var reqCtrl = new RequestsController(context);
+
+            //var req = reqCtrl.GetByPk(3);
+
+            //reqCtrl.SetReview(req);
+            ////reqCtrl.SetRejected(req); //// Rejects no matter what the total is
+            ////reqCtrl.SetApproved(req); //// Approves no matter what put in total
+
+            //req = reqCtrl.GetByPk(3);
+
+            //Console.WriteLine($"{req.Description} {req.Status} {req.Total}");
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            //// Login Method
+            //var context = new PrsDbContext();
+
+            //var userCtrl = new UsersController(context);
+
+            //var user = userCtrl.Login("sa", "sa");
+            ////var user = userCtrl.Login("sa", "sax"); // Will not work & say User not found
+
+            //if(user is null) {
+            //    Console.WriteLine("User not found");
+            //} else {
+            //    Console.WriteLine(user.Username);
+            //}
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -10,12 +10,47 @@ using System.Threading.Tasks;
 namespace PrsLibrary.Controllers {
     
     public class RequestsController {
-
         private readonly PrsDbContext _context;
 
         // Constructor
         public RequestsController(PrsDbContext context) {
-            _context = context;
+            this._context = context;
+        }
+
+        // Method to look in Requests table for Reviewed status
+        // where it is not for the reviewer since reviewer should not review their own
+        public IEnumerable<Request> GetRequestsInReview(int userId) {
+            // Query syntax
+            var requests = _context.Requests
+                                        .Where(x => x.Status == "REVIEW"
+                                                && x.UserId != userId)
+                                                .ToList();
+            return requests;
+        }
+
+        // Unconditionally sets to Rejected
+        public void SetRejected(Request request) {
+            request.Status = "REJECTED";
+            Change(request);
+        }
+
+        //// Methods to set status of request to Approve or Review
+
+        // If total of the request is less than or equal to $50, sets Approved
+        // Unconditionally sets to Approved
+        public void SetApproved(Request request) {
+            request.Status = "APPROVED";
+            Change(request);
+        }
+
+        // Sets status of Request to Review or Approved (if less than or equal to $50)
+        public void SetReview(Request request) {
+            if(request.Total <= 50) {
+                request.Status = "APPROVED";
+            } else {
+                request.Status = "REVIEW";
+            }
+            Change(request);
         }
 
         //// 5 Methods/ Functions
