@@ -10,7 +10,8 @@ namespace PrsLibrary.Controllers {
 
     public class UsersController {
         // Private Property for Context
-        private readonly PrsDbContext _context; // readonly is a safety net. Only way that can be set is in the contructor
+        private readonly PrsDbContext _context; // readonly is a safety net. Only way that can
+                                                // be set is in the contructor
 
         // Constructor
         public UsersController(PrsDbContext context) {

@@ -25,7 +25,7 @@ namespace PrsLibrary.Models {
         public int VendorId { get; set; }
         // Virtual Instance required for EF to
         // recognize the FK
-        public virtual Vendor Vendor { get; set; }
+        public virtual Vendor Vendor { get; set; } // The second Vendor can be anything. Doesn't have to be the same
 
         public Product() { } // Default Constructor
     }

@@ -7,49 +7,78 @@ namespace TestPrsLibrary {
     
     class Program {
         
-        static void Main(string[] args) {
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Since use this line below, created to reduce the blocks of code with a method
+        static void Print(Product product) {
+            Console.WriteLine($"{product.Id,-5} {product.PartNbr,-12} {product.Name,-12} {product.Price,10:c} {product.Vendor.Name,-15}");
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+        static void Main(string[] args) {
+            ///////////////////////////////////////////////////////////////////////////
+            // Creating Products Controller
             var context = new PrsDbContext();
 
-            // Instance of the controller
-            var userCtrl = new UsersController(context);
+            var prodCtrl = new ProductsController(context);
 
-            // Calls the Create method to add a User
-            var newUser = new User() {
-                Id = 0, Username = "zz", Password = "xx",
-                Firstname = "User", Lastname = "ZZ",
-                Phone = "211", Email = "xx@user.com",
-                IsReviewer = false, IsAdmin = false
-            };
+            var products = prodCtrl.GetAll();
 
-            //userCtrl.Create(newUser); //// This line adds a user
-
-            var user3 = userCtrl.GetByPk(3);
-            if(user3 is null) {
-                Console.WriteLine("User not found!");
-            } else {
-                Console.WriteLine($"User 3: {user3.Firstname} {user3.Lastname}");
+            foreach(var p in products) {
+                Print(p); // Calls the Console.WriteLine method in the Print above 
             }
 
-            user3.Lastname = "User3";
-            userCtrl.Change(user3);
-            ///////////////////////////////////////////////////////////////////////////////
-            var user33 = userCtrl.GetByPk(33);
-            if (user33 is null) {
-                Console.WriteLine("User not found!");
-            } else {
-                Console.WriteLine($"User33: {user3.Firstname} {user3.Lastname}");
+            var product = prodCtrl.GetByPk(2);
+
+            if (product is not null) {
+                Print(product);
             }
-            ///////////////////////////////////////////////////////////////////////////////
 
-            //userCtrl.Remove(6); // This line deleted the sixth instance oof the users
+            ////////////////////////////////////////////////////////////////////////////
+            
 
-            // Methods to get all users
-            var users = userCtrl.GetAll();
+            ///////////////////////////////////////////////////////////////////////////
+            //var context = new PrsDbContext();
 
-            foreach(var user in users) {
-                Console.WriteLine($"{user.Id} {user.Firstname} {user.Lastname}");
-            }
+            //// Instance of the controller
+            //var userCtrl = new UsersController(context);
+
+            //// Calls the Create method to add a User
+            //var newUser = new User() {
+            //    Id = 0, Username = "zz", Password = "xx",
+            //    Firstname = "User", Lastname = "ZZ",
+            //    Phone = "211", Email = "xx@user.com",
+            //    IsReviewer = false, IsAdmin = false
+            //};
+
+            ////userCtrl.Create(newUser); //// This line adds a user
+
+            //var user3 = userCtrl.GetByPk(3);
+            //if(user3 is null) {
+            //    Console.WriteLine("User not found!");
+            //} else {
+            //    Console.WriteLine($"User 3: {user3.Firstname} {user3.Lastname}");
+            //}
+
+            //user3.Lastname = "User3";
+            //userCtrl.Change(user3);
+            /////////////////////////////////////////////////////////////////////////////////
+            //var user33 = userCtrl.GetByPk(33);
+            //if (user33 is null) {
+            //    Console.WriteLine("User not found!");
+            //} else {
+            //    Console.WriteLine($"User33: {user3.Firstname} {user3.Lastname}");
+            //}
+            /////////////////////////////////////////////////////////////////////////////////
+
+            ////userCtrl.Remove(6); // This line deleted the sixth instance oof the users
+
+            //// Methods to get all users
+            //var users = userCtrl.GetAll();
+
+            //foreach(var user in users) {
+            //    Console.WriteLine($"{user.Id} {user.Firstname} {user.Lastname}");
+            //}
+            ////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
 }
