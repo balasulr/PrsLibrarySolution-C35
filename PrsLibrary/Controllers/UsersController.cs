@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace PrsLibrary.Controllers {
 
     public class UsersController {
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Private Property for Context
         private readonly PrsDbContext _context; // readonly is a safety net. Only way that can
                                                 // be set is in the contructor
@@ -17,7 +18,21 @@ namespace PrsLibrary.Controllers {
         public UsersController(PrsDbContext context) {
             this._context = context;
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Login Method
+        public User Login(string username, string password) {
+            // Method syntax
+            return _context.Users
+                            .SingleOrDefault(x => x.Username == username
+                                                    && x.Password == password);
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         //// 2 Read fuctions then have Insert, Update & Delete
 
         // 1. Method to return all of the users in the User Table

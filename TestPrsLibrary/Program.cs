@@ -2,6 +2,7 @@
 using PrsLibrary.Models;
 
 using System;
+using System.Linq;
 
 namespace TestPrsLibrary {
     
@@ -15,26 +16,66 @@ namespace TestPrsLibrary {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
         static void Main(string[] args) {
-            ///////////////////////////////////////////////////////////////////////////
-            // Creating Products Controller
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            //// Login Method
             var context = new PrsDbContext();
 
-            var prodCtrl = new ProductsController(context);
+            var userCtrl = new UsersController(context);
 
-            var products = prodCtrl.GetAll();
+            var user = userCtrl.Login("sa", "sa");
+            //var user = userCtrl.Login("sa", "sax"); // Will not work & say User not found
 
-            foreach(var p in products) {
-                Print(p); // Calls the Console.WriteLine method in the Print above 
+            if(user is null) {
+                Console.WriteLine("User not found");
+            } else {
+                Console.WriteLine(user.Username);
             }
 
-            var product = prodCtrl.GetByPk(2);
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (product is not null) {
-                Print(product);
-            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            //var context = new PrsDbContext();
+
+            //var username = "gdoud";
+            //var password = "password";
+            //// First Way
+            //context.Users.SingleOrDefault (x => x.Username == username && x.Password == password);
+            //// Second way
+            //var user = from u in context.Users
+            //        where u.Username == username && u.Password == password
+            //        select u;
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            ///////////////////////////////////////////////////////////////////////////
+            //var reqlCtrl = new RequestLinesController(context);
+
+            //var requestlines = reqlCtrl.GetAll();
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////////////////////////////////////
+            //// Creating Products Controller
+            //var context = new PrsDbContext();
+
+            //var prodCtrl = new ProductsController(context);
+
+            //var products = prodCtrl.GetAll();
+
+            //foreach(var p in products) {
+            //    Print(p); // Calls the Console.WriteLine method in the Print above 
+            //}
+
+            //var product = prodCtrl.GetByPk(2);
+
+            //if (product is not null) {
+            //    Print(product);
+            //}
 
             ////////////////////////////////////////////////////////////////////////////
-            
+
 
             ///////////////////////////////////////////////////////////////////////////
             //var context = new PrsDbContext();
